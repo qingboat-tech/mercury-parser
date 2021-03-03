@@ -1888,13 +1888,13 @@ var TwitterExtractor = {
 var NYTimesExtractor = {
   domain: 'www.nytimes.com',
   title: {
-    selectors: ['h1.g-headline', 'h1[itemprop="headline"]', 'h1.headline']
+    selectors: ['h1.g-headline', 'h1[itemprop="headline"]', 'h1.headline', 'h1 .balancedHeadline']
   },
   author: {
-    selectors: [['meta[name="author"]', 'value'], '.g-byline', '.byline']
+    selectors: [['meta[name="author"]', 'value'], '.g-byline', '.byline', ['meta[name="byl"]', 'value']]
   },
   content: {
-    selectors: ['div.g-blocks', 'article#story'],
+    selectors: ['div.g-blocks', 'section[name="articleBody"]', 'article#story'],
     transforms: {
       'img.g-lazy': function imgGLazy($node) {
         var src = $node.attr('src');
@@ -5767,6 +5767,38 @@ var EpaperZeitDeExtractor = {
   }
 };
 
+var WwwWoshipmComExtractor = {
+  domain: 'www.woshipm.com',
+  title: {
+    selectors: [// enter title selectors
+    '.article--title']
+  },
+  author: {
+    selectors: [// enter author selectors
+    'div.author.u-flex > a']
+  },
+  date_published: {
+    selectors: [// enter selectors
+    'div.meta--sup > time']
+  },
+  dek: null,
+  lead_image_url: {
+    selectors: [// enter selectors
+    ['div p:nth-child(2) img[data-action="zoom"]', 'src']]
+  },
+  content: {
+    selectors: [// enter content selectors
+    'div.article--content'],
+    // Is there anything in the content you selected that needs transformed
+    // before it's consumable content? E.g., unusual lazy loaded images
+    transforms: {},
+    // Is there anything that is in the result that shouldn't be?
+    // The clean selectors will remove anything that matches from
+    // the result
+    clean: []
+  }
+};
+
 
 
 var CustomExtractors = /*#__PURE__*/Object.freeze({
@@ -5903,7 +5935,8 @@ var CustomExtractors = /*#__PURE__*/Object.freeze({
   WwwPhoronixComExtractor: WwwPhoronixComExtractor,
   PitchforkComExtractor: PitchforkComExtractor,
   BiorxivOrgExtractor: BiorxivOrgExtractor,
-  EpaperZeitDeExtractor: EpaperZeitDeExtractor
+  EpaperZeitDeExtractor: EpaperZeitDeExtractor,
+  WwwWoshipmComExtractor: WwwWoshipmComExtractor
 });
 
 var Extractors = _Object$keys(CustomExtractors).reduce(function (acc, key) {
