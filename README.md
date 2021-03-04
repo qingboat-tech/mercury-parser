@@ -142,6 +142,12 @@ mercury-parser https://postlight.com/trackchanges/mercury-goes-open-source --ext
 mercury-parser https://postlight.com/trackchanges/mercury-goes-open-source --add-extractor ./src/extractors/fixtures/postlight.com/index.js
 ```
 
+## Custom Parser
+
+You can write your custom parser according to following [instructions](https://github.com/qingboat-tech/mercury-parser/tree/master/src/extractors/custom)
+
+
+
 ## License
 
 Licensed under either of the below, at your preference:
